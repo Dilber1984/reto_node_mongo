@@ -18,7 +18,16 @@ router.get('/',(req,res)=>{//mensaje para errores
     res.send("Inicio de las ofertas")
 });
 
-router.post('/oferta',(req,res)=>{
+router.get('/oferta',(req,res)=>{//Para buscar la información
+    OfertaSchema.find(function(err,datos){
+        if(err){
+            console.log("Error al buscar la oferta")
+        }else{
+            res.send(datos);
+        }
+    })
+})
+router.post('/oferta',(req,res)=>{//para crear o ingresar la información
     let nuevaOferta=new OfertaSchema({//definir nueva oferta
         TipDoc:req.body.tipdoc,
         NumDoc:req.body.numdoc,
